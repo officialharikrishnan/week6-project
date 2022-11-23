@@ -6,7 +6,12 @@ module.exports = {
     userSignup: (userData) => {
         return new Promise(async (resolve, reject) => {
             userData.password = await bcrypt.hash(userData.password, 10)
-            db.get().collection(collection.USER_COLLECTION).insertOne(userData)
+            var res =await db.get().collection(collection.USER_COLLECTION).insertOne(userData)
+            if(res){
+                resolve()
+            }else{
+                reject()
+            }
         })
     },
     userLogin: (userData) => {
@@ -20,6 +25,8 @@ module.exports = {
                         reject()
                     }
                 })
+            }else{
+                reject()
             }
         })
     }

@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var hbs = require('express-handlebars');
+var session=require('express-session')
 var adminRouter = require('./admin');
 var userRouter = require('./user');
 var db=require('../model/db-connection/dbConnection')
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
+app.use(session({secret:"key",cookie:{maxAge:60*1000}}))
 db.connect((err)=>{
   if(err) console.log("Connection error",err);
   else console.log("Database connected successfully");

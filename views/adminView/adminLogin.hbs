@@ -4,10 +4,11 @@
             <div class="login-page">
                 <p>Admin</p>
                 <h1>Login</h1>
-                <form action="">
+                <p class="error">{{error}}</p>
+                <form action="/admin/admin-login" method="post">
                     <label>Admin ID</label>
                     <br>
-                    <input type="email" name="password">
+                    <input type="text" name="id">
                     <br>
                     <label>Password</label>
                     <br>

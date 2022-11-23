@@ -1,0 +1,19 @@
+<div class="user-list">
+    <h1>Users</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+        </tr>
+        {{#each response}}
+
+        <tr>
+            <td>{{this.name}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.phone}}</td>
+        </tr>
+
+        {{/each}}
+    </table>
+</div>
