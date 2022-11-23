@@ -1,6 +1,7 @@
 const collection = require('../db-connection/collection')
 var db=require('../db-connection/dbConnection')
-var bcrypt=require('bcrypt')
+var bcrypt=require('bcrypt');
+const { ObjectId } = require('mongodb');
 module.exports={
 
     adminLogin:(adminData)=>{
@@ -26,5 +27,42 @@ module.exports={
                 reject()
             }
         })
+    },
+    getEditUser:(userId)=>{
+        return new Promise(async(resolve,reject)=>{
+            var user=await db.get().collection(collection.USER_COLLECTION).findOne({_id:ObjectId(userId)})
+            if(user){
+                resolve(user)
+            }else{
+                reject()
+            }
+        })
+    },
+    editUser:(userId,userData)=>{
+        return new Promise(async(resolve,reject)=>{
+            var res =await db.get().collection(collection.USER_COLLECTION).updateOne({_id:ObjectId(userId)},{
+                $set:{
+                    name:userData.name,
+                    email:userData.email
+                }
+            })
+            if(res){
+                resolve(res)
+            }else{
+                reject()
+            }
+        })
+    },
+    removeUser:(userId)=>{
+        return new Promise(async(resolve,reject)=>{
+            var res = await db.get().collection(collection.USER_COLLECTION).deleteOne({_id:ObjectId(userId)})
+            if(res){
+                resolve(res)
+            }else{
+                reject()
+            }
+        })
+
     }
+
 }

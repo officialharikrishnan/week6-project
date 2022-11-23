@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
-app.use(session({secret:"key",cookie:{maxAge:60*1000}}))
+app.use(session({secret:"key",cookie:{maxAge:5*60000}}))
 db.connect((err)=>{
   if(err) console.log("Connection error",err);
   else console.log("Database connected successfully");

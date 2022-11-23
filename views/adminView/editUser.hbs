@@ -1,0 +1,15 @@
+<div class="edit-user">
+<h1>Edit user</h1>
+    <p class="error">{{error}}</p>
+    <form action="/admin/edituser-submit/{{response._id}}" method="post">
+        <label>User name</label>
+        <br>
+        <input type="text" name="name" value="{{response.name}}">
+        <br>
+        <label>Email</label>
+        <br>
+        <input type="email" name="email" value="{{response.email}}">
+        <br>
+        <button class="btn btn-success">Edit user</button>
+    </form>
+</div>

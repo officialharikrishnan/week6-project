@@ -13,3 +13,18 @@ table {
   tr:nth-child(even) {
     background-color: #dddddd;
   }
+.admin-dashboard{
+    margin: 20%;
+    margin-left: 40%;
+
+}
+.admin-dashboard button{
+  margin-top: 10%;
+  margin-left: 1%;
+}
+.add-user{
+  text-align: center;
+}
+.edit-user{
+  text-align: center;
+}

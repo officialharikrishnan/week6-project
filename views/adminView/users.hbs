@@ -4,16 +4,17 @@
         <tr>
             <th>Name</th>
             <th>Email</th>
-            <th>Phone</th>
+            <th>Action</th>
         </tr>
         {{#each response}}
-
         <tr>
             <td>{{this.name}}</td>
             <td>{{this.email}}</td>
-            <td>{{this.phone}}</td>
+            <td>
+                <a href="/admin/edituser/{{this._id}}"><Button class="btn btn-warning">Edit</Button></a>
+                <a href="/admin/deleteuser/{{this._id}}"><Button class="btn btn-danger">Delete</Button></a>
+            </td>
         </tr>
-
         {{/each}}
     </table>
 </div>
