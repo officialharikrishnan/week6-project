@@ -3,8 +3,8 @@ const userHelpers = require('../model/user-helper/userHelper')
 module.exports = {
 
     userLoginRoute: (req, res) => {
-        userHelpers.userLogin(req.body).then(() => {
-            req.session.user = req.body.email
+        userHelpers.userLogin(req.body).then((data) => {
+            req.session.user = {name:data.name,id:data.id}
             req.session.loggedIn = true
             res.redirect('/home')
         }).catch(() => {
@@ -12,8 +12,8 @@ module.exports = {
         })
     },
     userSignupRoute: (req, res) => {
-        userHelpers.userSignup(req.body).then(() => {
-            req.session.user = req.body.email
+        userHelpers.userSignup(req.body).then((data) => {
+            req.session.user = {name:data.name,id:data.id}
             req.session.loggedIn = true
             res.redirect('/home')
         }).catch((err) => {
@@ -36,6 +36,13 @@ module.exports = {
         } else {
             res.render('userView/login')
         }
+    },
+    accountInfo:(req,res)=>{
+        userHelpers.accountDetails(req.session.user.id).then((data)=>{
+            res.render('userView/account',{data})
+        }).catch(()=>{
+            alert('somthing went wrong')
+        })
     },
     logOut: (req, res) => {
         req.session.user = null

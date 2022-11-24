@@ -1,6 +1,44 @@
-<div class="admin-dashboard">
-    <h3>Admin dashboard</h3>
-    <a href="/admin/logout">
-        <button class="btn btn-secondary">Logout</button></a>
-    <a href="/admin/users"><button class="btn btn-secondary">All users</button></a>
+
+
+<div class="user-list">
+    <h1>Users</h1>
+    <div class="container">
+
+    <table id="example" class="table hover ">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each response}}
+            <tr>
+                <td>{{this.name}}</td>
+                <td>{{this.email}}</td>
+                <td>
+                    <a href="/admin/edituser/{{this._id}}"><Button class="btn btn-warning">Edit</Button></a>
+                    <a href="/admin/deleteuser/{{this._id}}"><Button class="btn btn-danger">Delete</Button></a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+        
+    </table>
+    </div>
+
 </div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable({
+            paging: false,
+            info: false,    
+        });
+    });
+</script>

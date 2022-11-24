@@ -1,24 +1,26 @@
-<div>
-    <div class="row">
-        <div class="section">
-            <div class="signup-page">
-                <h1>Signup</h1>
-                <form action="/signup-submit" method="post">
-                    <label>Email Id</label>
-                    <br>
-                    <input type="email" name="email">
-                    <br>
-                    <label>Name</label>
-                    <br>
-                    <input type="text" name="name">
-                    <br>
-                    <label>Password</label>
-                    <br>
-                    <input type="password" name="password">
-                    <br>
-                    <Button type="submit">Submit</Button>
-                </form>
-            </div>
+<section>
+    <div class="container">
+        <div class="page">
+            <h1>Signup</h1>
+            <form action="/signup-submit" method="post">
+                <p class="error">{{error}}</p>
+                <label>Email</label>
+                <br>
+                <input type="email" name="email">
+                <br>
+                <label>Name</label>
+                <br>
+                <input type="text" name="name">
+                <br>
+                <label>Password</label>
+                <br>
+                <input type="password" name="password">
+                <br>
+                <Button type="submit">Submit</Button>
+                <br>
+                <br>
+                <a href="/"><p>I already have an account</p></a>
+            </form>
         </div>
     </div>
-</div>
+</section>

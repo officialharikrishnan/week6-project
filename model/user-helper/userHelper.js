@@ -1,6 +1,7 @@
 const collection = require('../db-connection/collection')
 var db = require('../db-connection/dbConnection')
 var bcrypt = require('bcrypt')
+const { ObjectId } = require('mongodb')
 module.exports = {
 
     userSignup: (userData) => {
@@ -8,7 +9,11 @@ module.exports = {
             userData.password = await bcrypt.hash(userData.password, 10)
             var res =await db.get().collection(collection.USER_COLLECTION).insertOne(userData)
             if(res.insertedId){
-                resolve(res)
+                let data={
+                    name:userData.name,
+                    id:res.insertedId
+                }
+                resolve(data)
             }else{
                 reject()
             }
@@ -20,11 +25,26 @@ module.exports = {
             if(res){
                 bcrypt.compare(userData.password,res.password).then((result)=>{
                     if(result){
-                        resolve(result)
+                        let data={
+                            name:res.name,
+                            id:res._id
+                        }
+                        resolve(data)
                     }else{
                         reject()
                     }
                 })
+            }else{
+                reject()
+            }
+        })
+    },
+    accountDetails:(userId)=>{
+        console.log(ObjectId(userId));
+        return new Promise(async(resolve,reject)=>{
+            var res=await db.get().collection(collection.USER_COLLECTION).findOne({_id:ObjectId(userId)})
+            if(res){
+                resolve(res)
             }else{
                 reject()
             }

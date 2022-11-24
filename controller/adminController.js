@@ -6,7 +6,7 @@ module.exports = {
         adminHelper.adminLogin(req.body).then(() => {
             req.session.admin=req.body.id
             req.session.adminLoggedIn=true
-            res.redirect('/admin/dashboard')
+            res.redirect('/admin')
         })
             .catch(() => {
                 res.render('adminView/adminLogin', { error: "invalid ID or Password" })
@@ -14,7 +14,7 @@ module.exports = {
     },
     getAllusersRoute: (req, res) => {
         adminHelper.getAllUsers().then((response) => {
-            res.render('adminView/users', { response, admin: true,alluser:true })
+            res.render('adminView/dashBoard', { response, admin: true,alluser:true })
         })
             .catch(() => {
                 console.log("error");
@@ -28,16 +28,16 @@ module.exports = {
             res.render('adminView/adminLogin')
         }
     },
-    isAdminLoggedIn:(req,res,next)=>{
-        if(!req.session.admin){
-            req.session.adminLoggedIn=false
-        }
-        if(req.session.adminLoggedIn){
-            res.render('adminView/dashBoard')
-        }else{
-            next()
-        }
-    },
+    // isAdminLoggedIn:(req,res,next)=>{
+    //     if(!req.session.admin){
+    //         req.session.adminLoggedIn=false
+    //     }
+    //     if(req.session.adminLoggedIn){
+    //         res.render('adminView/dashBoard')
+    //     }else{
+    //         next()
+    //     }
+    // },
     adminLogout:(req,res)=>{
         req.session.admin=null
         req.session.adminLoggedIn=false
@@ -45,7 +45,7 @@ module.exports = {
     },
     addUserRoute:(req,res)=>{
         userSignup(req.body).then((response)=>{
-            res.redirect('/admin/users')
+            res.redirect('/admin')
         })
         .catch(()=>{
             res.render('adminView/addUser',{error:"somthing went wrong"})
@@ -62,7 +62,7 @@ module.exports = {
     },
     editUserRoute:(req,res)=>{
         adminHelper.editUser(req.params.id,req.body).then((response)=>{
-            res.redirect('/admin/users')
+            res.redirect('/admin')
         })
         .catch(()=>{
             alert("Somthing went to wrong")
@@ -71,7 +71,7 @@ module.exports = {
     deleteUser:(req,res)=>{
         adminHelper.removeUser(req.params.id).then((response)=>{
             console.log(response);
-            res.redirect('/admin/users')
+            res.redirect('/admin')
         })
         .catch(()=>{
             alert("Somthing went to wrong")
