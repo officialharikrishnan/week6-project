@@ -1,6 +1,6 @@
 var adminHelper = require('../model/admin-helper/admin-helper')
 var {userSignup} = require('../model/user-helper/userHelper')
-const { response } = require('../routers/app')
+// const { response } = require('../routers/app')
 module.exports = {
     adminLoginRoute: (req, res) => {
         adminHelper.adminLogin(req.body).then(() => {
@@ -49,7 +49,6 @@ module.exports = {
         })
         .catch(()=>{
             res.render('adminView/addUser',{error:"somthing went wrong"})
-
         })
     },
     editPage:(req,res)=>{
