@@ -7,7 +7,8 @@ const {adminLoginRoute,getAllusersRoute,adminSession,isAdminLoggedIn,adminLogout
 // });
 router.post('/admin-login',adminLoginRoute)
 
-router.get('/',adminSession,getAllusersRoute)
+router.get('/',isAdminLoggedIn)
+router.get('/dashboard',adminSession,getAllusersRoute)
 router.get('/adduser',adminSession,(req,res)=>{
   res.render('adminView/addUser',{admin:true,addUser:true})
 })

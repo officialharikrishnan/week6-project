@@ -1,7 +1,8 @@
 var adminHelper = require('../model/admin-helper/admin-helper')
 var {userSignup} = require('../model/user-helper/userHelper')
-// const { response } = require('../routers/app')
+
 module.exports = {
+
     adminLoginRoute: (req, res) => {
         adminHelper.adminLogin(req.body).then(() => {
             req.session.admin=req.body.id
@@ -9,7 +10,7 @@ module.exports = {
             res.redirect('/admin')
         })
             .catch(() => {
-                res.render('adminView/adminLogin', { error: "invalid ID or Password" })
+                res.render('adminView/adminLogin', {error :"Invalid id or Password"})
             })
     },
     getAllusersRoute: (req, res) => {
@@ -28,16 +29,16 @@ module.exports = {
             res.render('adminView/adminLogin')
         }
     },
-    // isAdminLoggedIn:(req,res,next)=>{
-    //     if(!req.session.admin){
-    //         req.session.adminLoggedIn=false
-    //     }
-    //     if(req.session.adminLoggedIn){
-    //         res.render('adminView/dashBoard')
-    //     }else{
-    //         next()
-    //     }
-    // },
+    isAdminLoggedIn:(req,res,next)=>{
+        if(!req.session.admin){
+            req.session.adminLoggedIn=false
+        }
+        if(req.session.adminLoggedIn){
+            res.redirect('/admin/dashboard')
+        }else{
+            res.render('adminView/adminLogin')
+        }
+    },
     adminLogout:(req,res)=>{
         req.session.admin=null
         req.session.adminLoggedIn=false
@@ -48,7 +49,7 @@ module.exports = {
             res.redirect('/admin')
         })
         .catch(()=>{
-            res.render('adminView/addUser',{error:"somthing went wrong"})
+            res.render('adminView/addUser',{error:"This Email already used",admin:true,addUser:true})
         })
     },
     editPage:(req,res)=>{
@@ -57,7 +58,7 @@ module.exports = {
             res.render('adminView/editUser',{response})
         })
         .catch(()=>{
-            alert("Somthing went to wrong")
+            console.log("edit error");
         })
     },
     editUserRoute:(req,res)=>{
@@ -65,7 +66,7 @@ module.exports = {
             res.redirect('/admin')
         })
         .catch(()=>{
-            alert("Somthing went to wrong")
+            console.log("edit error");
         })
     },
     deleteUser:(req,res)=>{
@@ -74,7 +75,7 @@ module.exports = {
             res.redirect('/admin')
         })
         .catch(()=>{
-            alert("Somthing went to wrong")
+            console.log("delete error");
         })
     }
 }

@@ -6,17 +6,26 @@ module.exports = {
 
     userSignup: (userData) => {
         return new Promise(async (resolve, reject) => {
-            userData.password = await bcrypt.hash(userData.password, 10)
-            var res =await db.get().collection(collection.USER_COLLECTION).insertOne(userData)
-            if(res.insertedId){
-                let data={
-                    name:userData.name,
-                    id:res.insertedId
-                }
-                resolve(data)
+
+            var user = await db.get().collection(collection.USER_COLLECTION).findOne({email:userData.email})
+            if(user){
+                reject(true)
             }else{
-                reject()
+
+                userData.password = await bcrypt.hash(userData.password, 10)
+                var res =await db.get().collection(collection.USER_COLLECTION).insertOne(userData)
+                if(res.insertedId){
+                    let data={
+                        name:userData.name,
+                        id:res.insertedId
+                    }
+                    resolve(data)
+                }else{
+                    reject()
+                }
             }
+
+
         })
     },
     userLogin: (userData) => {
@@ -31,11 +40,11 @@ module.exports = {
                         }
                         resolve(data)
                     }else{
-                        reject()
+                        reject(false)
                     }
                 })
             }else{
-                reject()
+                reject(false)
             }
         })
     },

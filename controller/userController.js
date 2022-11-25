@@ -1,5 +1,6 @@
 const userHelpers = require('../model/user-helper/userHelper')
-
+var count=0
+var error
 module.exports = {
 
     userLoginRoute: (req, res) => {
@@ -12,12 +13,16 @@ module.exports = {
         })
     },
     userSignupRoute: (req, res) => {
-        userHelpers.userSignup(req.body).then((data) => {
+        userHelpers.userSignup(req.body)
+        .then((data) => {
+            console.log("dosign",data);
             req.session.user = {name:data.name,id:data.id}
             req.session.loggedIn = true
             res.redirect('/home')
         }).catch((err) => {
-            console.log(err);
+            if(err){
+                res.render('userView/signup',{error : "This email already used"})
+            }
         })
     },
     sessionCheck: (req, res, next) => {
@@ -41,7 +46,7 @@ module.exports = {
         userHelpers.accountDetails(req.session.user.id).then((data)=>{
             res.render('userView/account',{data})
         }).catch(()=>{
-            alert('somthing went wrong')
+            console.log("account info error");
         })
     },
     logOut: (req, res) => {
