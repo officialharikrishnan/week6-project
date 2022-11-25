@@ -13,6 +13,9 @@ module.exports = {
         })
     },
     userSignupRoute: (req, res) => {
+        if(!req.body.name || !req.body.email || !req.body.password){
+            res.render('userView/signup',{error:"Enter details"})
+        }else{
         userHelpers.userSignup(req.body)
         .then((data) => {
             console.log("dosign",data);
@@ -24,6 +27,7 @@ module.exports = {
                 res.render('userView/signup',{error : "This email already used"})
             }
         })
+    }
     },
     sessionCheck: (req, res, next) => {
         if (req.session.user) {
