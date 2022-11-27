@@ -33,22 +33,19 @@ var nameError = document.getElementById('name-error');
 var emailError = document.getElementById('email-error');
 var submitError = document.getElementById('submit-error');
 
-function validateName(){
+const validateName=()=>{
     var name=document.getElementById('contact-name').value;
     if(name.length == 0){
-        // e.preventDefault()
-        console.log("hhhh");
         nameError.innerHTML='write name';
-        return false;
+        return false
     }
     if(!name.match(/^[A-Za-z]/)){
         nameError.innerHTML='entername';
-        return false;
+        return false
     }
-    nameError.innerHTML='<i class="fa fa-check" aria-hidden="true"></i>';
-    return true;
+    nameError.innerHTML=''
 }
-function validateEmail(){
+const validateEmail = () => {
     
     var email=document.getElementById('contact-email').value;
     if(email.length == 0){
@@ -57,10 +54,9 @@ function validateEmail(){
     }
     if(!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)+$/)){
         emailError.innerHTML='enter valied email address'
-        return false;
+        return false
     }
-    emailError.innerHTML='<i class="fa fa-check" aria-hidden="true"></i>';
-    return true;
+    emailError.innerHTML=''
 }
 
 

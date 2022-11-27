@@ -35,8 +35,6 @@
     function validateName() {
         var name = document.getElementById('contact-name').value;
         if (name.length == 0) {
-            // e.preventDefault()
-            console.log("hhhh");
             nameError.innerHTML = 'write name';
             return false;
         }
@@ -44,8 +42,7 @@
             nameError.innerHTML = 'entername';
             return false;
         }
-        nameError.innerHTML = '<i class="fa fa-check" aria-hidden="true"></i>';
-        return true;
+        nameError.innerHTML = '';
     }
     function validateEmail() {
 
@@ -56,10 +53,10 @@
         }
         if (!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)+$/)) {
             emailError.innerHTML = 'enter valied email address'
-            return false;
+            return false
         }
-        emailError.innerHTML = '<i class="fa fa-check" aria-hidden="true"></i>';
-        return true;
+        emailError.innerHTML='';
+
     }
 
 

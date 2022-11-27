@@ -57,3 +57,6 @@ section{
 .user-list h1{
   margin-left: 40%;
 }
+.valid{
+  color: rgb(3, 185, 3);
+}

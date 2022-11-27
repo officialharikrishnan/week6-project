@@ -49,7 +49,6 @@ module.exports = {
         })
     },
     accountDetails:(userId)=>{
-        console.log(ObjectId(userId));
         return new Promise(async(resolve,reject)=>{
             var res=await db.get().collection(collection.USER_COLLECTION).findOne({_id:ObjectId(userId)})
             if(res){
